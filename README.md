@@ -15,3 +15,30 @@ cd semicon-image-restoration
 
 # Install the required Python libraries
 pip install -r requirements.txt
+```
+
+## 2. Model Weights & Restored Outputs (Important Note)
+**Note: Due to GitHub's file size limits, the model weights and full restored outputs dataset are hosted on Google Drive. Download them here:**
+* **Model Weights (`swinir_model.pth`):** [https://drive.google.com/file/d/16NQBhF-NAL_CvEe42rPb_QUDeFZpehVN/view?usp=drive_link]
+* **Restored Output Images (`restored_outputs.zip`):** [https://drive.google.com/file/d/1UMmWR56dkD2pB5wYNh6hlgejJT2F1dzf/view?usp=drive_link]
+
+**Setup for Evaluation:** Once downloaded, please place the `swinir_model.pth` file exactly in this folder path: `weights/swinir_model.pth`
+
+## 3. How to Run the Evaluation Script
+The most important file in this repository is `evaluate.py`. It is designed to run without any manual edits.
+
+Run the following command to test the AI on a folder of degraded images:
+
+```bash
+python evaluate.py --input_dir /path/to/test_images --output_dir /path/to/save_outputs
+```
+* `--input_dir`: The path to the folder containing the noisy, low-resolution test images (accepts `.npy`, `.png`, etc.).
+* `--output_dir`: The path to the folder where the AI will save the cleaned, high-resolution `.png` images.
+
+## 4. Repository Structure
+* `evaluate.py`: The standalone inference script for the benchmarking team.
+* `train.py`: The Python script documenting our training process, dataset loaders, loss functions, and optimizer setup.
+* `requirements.txt`: The exact Python environment dependencies.
+* `weights/download_link.txt`: Direct link to download the model weights.
+* `restored_outputs/download_link.txt`: Direct link to download the complete test outputs.
+* `models/`: Contains the SwinIR architecture code used by the evaluation script.
