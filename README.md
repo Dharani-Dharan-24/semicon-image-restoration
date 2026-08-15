@@ -10,7 +10,7 @@ To set up the environment and run the code, clone this repository and install th
 
 ```bash
 # Clone the repository
-git clone <https://github.com/Dharani-Dharan-24/semicon-image-restoration>
+git clone https://github.com/Dharani-Dharan-24/semicon-image-restoration
 cd semicon-image-restoration
 
 # Install the required Python libraries
