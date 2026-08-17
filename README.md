@@ -42,3 +42,11 @@ python evaluate.py --input_dir /path/to/test_images --output_dir /path/to/save_o
 * `weights/download_link.txt`: Direct link to download the model weights.
 * `restored_outputs/download_link.txt`: Direct link to download the complete test outputs.
 * `models/`: Contains the SwinIR architecture code used by the evaluation script.
+
+## 5. How to Train / Fine-Tune the Model
+To fine-tune the model on a custom dataset using transfer learning:
+1. Create two folders in the root directory: `train_lq` (for noisy/degraded images) and `train_hq` (for clean/ground-truth images).
+2. Ensure the image filenames match exactly across both folders.
+3. Run the training script:
+   python train.py
+This will fine-tune the pre-trained model for 200 epochs and save checkpoints after every epoch in the `weights/` folder.
