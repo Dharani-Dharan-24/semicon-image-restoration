@@ -91,9 +91,20 @@ def main():
     train_loader = DataLoader(train_dataset, batch_size=4, shuffle=True)
     
     # 2. Initialize Model (SwinIR)
+    # 1. Initialize the empty SwinIR architecture
     model = SwinIR(upscale=4, in_chans=3, img_size=64, window_size=8, 
-                   depths=[6, 6, 6, 6, 6, 6], embed_dim=180, num_heads=[6, 6, 6, 6, 6, 6], 
-                   mlp_ratio=2, upsampler='nearest+conv', resi_connection='1conv')
+                  depths=[6, 6, 6, 6, 6, 6], embed_dim=180, num_heads=[6, 6, 6, 6, 6, 6], 
+                  mlp_ratio=2, upsampler='nearest+conv', resi_connection='1conv')
+
+    # 2. Load the pre-trained weights to start with existing knowledge
+    pretrained_path = '/content/weights/swinir_model.pth'
+    pretrained_dict = torch.load(pretrained_path)
+
+    # Handle potential dictionary key differences from the base model
+    param_key = "params_ema" if "params_ema" in pretrained_dict else "params"
+    model.load_state_dict(pretrained_dict[param_key] if param_key in pretrained_dict else pretrained_dict, strict=True)
+
+    # 3. Send the model to the GPU
     model = model.to(device)
     
     # 3. Setup Loss, Optimizer, and Scheduler
